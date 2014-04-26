@@ -77,7 +77,7 @@ Cada turno vale uma quantidade determinada de pontos e possui uma dificuldade
 pré-definida, de acordo com a tabela abaixo:
 
 Turno | Pontuação | Dificuldade
-+----+|+----------|+-----------
+------|-----------|------------
   1   | 10        | Fácil
   2   | 100       | Fácil
   3   | 500       | Fácil
