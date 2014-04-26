@@ -5,17 +5,35 @@
  * License:      This file is placed in public domain.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "interface_base.h"
+#define SERVIDOR_ARQUIVO
 
-tipoPalavra * gerarPalavra (FILE * listaDePalavras) {
+#include "arquivo.h"
+
+
+void embaralhaVetor(void *arr, size_t n, size_t size) {
+	char * aux;
+	char * array;
+
+	array = (char *) arr;
+	aux = (char *) malloc(size);
+
+	size_t i, j;
+	for (i = n-1; i + 1 > 0; --i) {
+		j = rand() % (i+1);
+
+		memcpy(aux, &array[size*j], size);
+		memcpy(&array[size*j], &array[size*i], size);
+		memcpy(&array[size*i], aux, size);
+	}
+	free(aux);
+}
+
+tipoPalavra * gerarPalavra (FILE * arquivoDePalavras) {
 	tipoPalavra * palavraAtual;
 	palavraAtual = NULL;
 
 	palavraAtual = malloc (sizeof (tipoPalavra));
 	palavraAtual->chave = NULL;
-	palavraAtual->dificuldade = NULL;
 	palavraAtual->dica1 = NULL;
 	palavraAtual->dica2 = NULL;
 	palavraAtual->dica3 = NULL;
@@ -26,9 +44,9 @@ tipoPalavra * gerarPalavra (FILE * listaDePalavras) {
 	int palavraTamanho = 0;
 
 	while ( count <= 5 ) {
-		letraAtual=fgetc(listaDePalavras);
+		letraAtual=fgetc(arquivoDePalavras);
 
-		if (letraAtual == EOF || letraAtual == '\n' ) {
+		if (letraAtual == '\n' || letraAtual == EOF) {
 			break;
 		}
 		else if (letraAtual == ' ' || letraAtual == '	') {
@@ -50,9 +68,7 @@ tipoPalavra * gerarPalavra (FILE * listaDePalavras) {
 			}
 
 			else if (count == 2) {
-				palavraAtual->dificuldade = (char *) realloc ( palavraAtual->dificuldade, (palavraTamanho + 1));
-				palavraAtual->dificuldade[palavraTamanho-1] = letraAtual;
-				palavraAtual->dificuldade[palavraTamanho] = '\0';
+				palavraAtual->dificuldade = letraAtual;
 			}
 
 			else if (count == 3) {
@@ -76,23 +92,35 @@ tipoPalavra * gerarPalavra (FILE * listaDePalavras) {
 		}
 	}
 
+	if (count < 5) return NULL;
 	return palavraAtual;
-
 }
 
-int main () {
-	FILE * arquivo;
-	arquivo = fopen ("batata", "r");
-	tipoPalavra * jota;
-	jota = gerarPalavra (arquivo);
+tipoPalavra ** gerarVetor (FILE * arquivoDePalavras, int * num) {
 
-	printf ("jota->chave: %s\n", jota->chave);
-	printf ("jota->dificuldade: %s\n", jota->dificuldade);
-	printf ("jota->dica1: %s\n", jota->dica1);
-	printf ("jota->dica2: %s\n", jota->dica2);
-	printf ("jota->dica3: %s\n", jota->dica3);
+	tipoPalavra * palavraAtual;
+	tipoPalavra ** vetorDePalavras;
 
-	return 0;
+	vetorDePalavras = NULL;
+	palavraAtual = NULL;
+
+	int count = 0;
+
+	while ((palavraAtual = gerarPalavra(arquivoDePalavras)) != NULL) {
+		count++;
+
+		vetorDePalavras = realloc ( vetorDePalavras, (sizeof (tipoPalavra*) * count));
+		vetorDePalavras[count-1]=palavraAtual;
+	}
+
+	*num=count;
+	return vetorDePalavras;
+}
+
+// O Jogo funciona bem com um mínimo de 20 palavras
+int palavrasSuficientes (int n) {
+	if ( n<20 ) return 0;
+	return 1;
 }
 
 

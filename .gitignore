@@ -1,0 +1,6 @@
+# Object files and binaries
+bin/*
+*.o
+
+# Temporary files
+tmp/
