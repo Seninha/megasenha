@@ -9,5 +9,6 @@
 ------|-------------------|-------------|------------------------------
 25/04 | 15:30 - 16:30     | Projetar    | Criar as regras de desenvolvimento no arquivo GUIDELINES.md
 25/04 | 15:30 - 16:30     | Projetar    | Criar README.md
+25/04 | 17:00 - 19:00     | Estudar     | Ensinar Alexandre a usar o git
 
 vim:set ft=markdown:
