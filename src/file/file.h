@@ -20,14 +20,6 @@
 #include <string.h>
 
 typedef struct {
-	char* name;
-	int score;
-	int turnNum;
-	FILE * in;
-	FILE * out;
-} playerType;
-
-typedef struct {
 	char * key;
 	char difficulty;
 	char * tip1;
