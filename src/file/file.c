@@ -150,23 +150,4 @@ int turnEnough (int n) { // {{{1
 
 // }}}1
 
-int main () {
-	FILE * arquivo;
-	arquivo = fopen ("batata.tmp", "r");
-	turnType ** jorje;
-	jorje = NULL;
-	int n;
-	jorje = arrayGenerate(arquivo, &n, 'f');
-
-	int i;
-	for (i=0; i<n; i++) {
-		printf("%s\n", jorje[i]->key);
-		printf("%c\n", jorje[i]->difficulty);
-		printf("%s\n", jorje[i]->tip1);
-		printf("%s\n", jorje[i]->tip2);
-		printf("%s\n", jorje[i]->tip3);
-	}
-	return 0;
-}
-
 /* vim: set ai fdm=marker fmr={{{,}}} ft=c: */

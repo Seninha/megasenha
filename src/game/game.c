@@ -8,7 +8,7 @@
 #include <game/game.h>
 
 int turnPlay (turnType ** turnArray, int num, int *usedElements, int turnNumber, playerType * playerCurrent) { // {{{1
-	*usedElements++;
+	(*usedElements)++;
 
 	if (*usedElements >= num)
 		*usedElements=1;
@@ -63,6 +63,8 @@ int level1 (mergedArrays * array, playerType * player1, playerType * player2) { 
 
 	if (player1->scoreLevel > player2->scoreLevel) return 1;
 	if (player2->scoreLevel > player1->scoreLevel) return 2;
+
+	return 0;
 }
 
 int level2 (mergedArrays * array, playerType * player) { // {{{1

@@ -104,18 +104,18 @@ fprintf (outCurrent, "\x1b[1;1H\x1b[2J");
 char * wordInsert (FILE * fileCurrent) { // {{{1
 	int count;
 	size_t n=0;
-	char ** wordCurrent;
+	char * wordCurrent;
 
-	* wordCurrent = NULL;
+	wordCurrent = NULL;
 
-	getline (wordCurrent, &n, fileCurrent);
+	getline (&wordCurrent, &n, fileCurrent);
 
-	for (count=0 ; *wordCurrent[count] != '\0' ; count++) {
-		*wordCurrent[count] = tolower(*wordCurrent[count]);
-		*wordCurrent[count] = toascii(*wordCurrent[count]);
+	for (count=0 ; wordCurrent[count] != '\0' ; count++) {
+		wordCurrent[count] = tolower(wordCurrent[count]);
+		wordCurrent[count] = toascii(wordCurrent[count]);
 	}
 
-	return *wordCurrent;
+	return wordCurrent;
 }
 
 void tipShow (FILE * outCurrent, char * tipCurrent, int n) { // {{{1
@@ -169,13 +169,13 @@ playerType * createPlayer (int num) { // {{{1
 	return player;
 }
 
-mergedArrays * readFile () { // {{{1
+mergedArrays * readFile (char * fileName) { // {{{1
 	int getError = 0;
 	FILE * fp;
-	fp = fopen("palavras.txt", "r");
+	fp = fopen(fileName, "r");
 
 	if (fp == NULL) {
-		fprintf (stderr, "ERRO: arquivo \"palavras.txt\" não existe.");
+		fprintf (stderr, "ERRO: arquivo \"%s\" não existe.\n", fileName);
 		return NULL;
 	}
 
@@ -186,17 +186,17 @@ mergedArrays * readFile () { // {{{1
 	fclose(fp);
 
 	if (turnEnough(array[0].turnSize)) {
-		fprintf (stderr, "ERRO: arquivo \"palavras.txt\" contém menos de 7 palavras fáceis.");
+		fprintf (stderr, "ERRO: arquivo \"%s\" contém menos de 7 palavras fáceis.\n", fileName);
 		getError = 1;
 	}
 
 	if (turnEnough(array[1].turnSize)) {
-		fprintf (stderr, "ERRO: arquivo \"palavras.txt\" contém menos de 7 palavras médias.");
+		fprintf (stderr, "ERRO: arquivo \"%s\" contém menos de 7 palavras médias.\n", fileName);
 		getError = 1;
 	}
 
 	if (turnEnough(array[2].turnSize)) {
-		fprintf (stderr, "ERRO: arquivo \"palavras.txt\" contém menos de 7 palavras difíceis.");
+		fprintf (stderr, "ERRO: arquivo \"%s\" contém menos de 7 palavras difíceis.\n", fileName);
 		getError = 1;
 	}
 

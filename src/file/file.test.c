@@ -14,8 +14,7 @@
 #include <CUnit/Basic.h>
 #include <file/file.c>
 
-// arrayShufle test {{{1
-void arrayShuffle_test (void) {
+void arrayShuffle_test (void) { // {{{1
 	int array [10] = { 0, 1,2,3,4,5,6,7,8,9};
 	arrayShuffle (array, 10, sizeof(int));
 	int result;
@@ -36,8 +35,7 @@ void arrayShuffle_test (void) {
 	CU_ASSERT_TRUE ( result );
 }
 
-// turnGenerate test {{{1
-void turnGenerate_test (void) {
+void turnGenerate_test (void) { // {{{1
 	FILE * f;
 	f = fopen("/tmp/turnGenerate.test", "w+");
 	fprintf ( f, "\
@@ -61,11 +59,11 @@ void turnGenerate_test (void) {
 	turn = turnGenerate (f, &difficultyCurrent);
 
 	int result = \
-		     strcmp(turn->key,"Áries") && \
+		     strcmp(turn->key,"áries") && \
 		     turn->difficulty == 'f' && \
 		     strcmp("corajoso", turn->tip1) && \
-		     strcmp(turn->tip2,"Intuitivo") && \
-		     strcmp(turn->tip3,"Destemido");
+		     strcmp(turn->tip2,"intuitivo") && \
+		     strcmp(turn->tip3,"destemido");
 
 	CU_ASSERT_TRUE ( ! result );
 
@@ -73,7 +71,51 @@ void turnGenerate_test (void) {
 	free(turn);
 }
 
-// main {{{1
+void arrayGenerate_test (void) { // {{{1
+	FILE * f;
+	f = fopen("/tmp/turnGenerate.test", "w+");
+	fprintf ( f, "\
+		Áries       f Corajoso      Intuitivo    Destemido\n\
+		Touro       f Perseverante  Habilidoso   Determinado\n\
+		Gêmeos      f Comunicativo  Curioso      Inteligente\n\
+		Câncer      F Cuidadoso     Afetuoso     Romântico\n\
+		Leão        M Criativo      Leal         Decidido\n\
+		Virgem      M Organizado    Corente      Prático\n\
+		Libra       M Equilibrado   Diplomático  Sociável\n\
+		Escorpião   M Intenso       Profundo     Perceptivo\n\
+		Sagitário   D Otimista      Sincero      Corajoso\n\
+		Capricórnio D Responsável   Competitivo  Realista\n\
+		Aquário     D Civilizado    Tolerante    Libertário\n\
+		Peixes      D Amável        Carinhoso    Romântico\n\
+		");
+	rewind (f);
+
+	turnType ** array;
+	int n = 0;
+
+	array = NULL;
+
+	array = arrayGenerate (f, &n, 'm');
+	printf("\n");
+	printf("%d", n);
+	printf("%s", array[0]->key);
+
+	int result = \
+		     array[2]->difficulty == 'm' && (\
+		     (strcmp(array[2]->key,"libra")       && strcmp("equilibrado", array[2]->tip1)  && strcmp(array[2]->tip2,"diplomático") && strcmp(array[2]->tip3,"sociável"))   || \
+		     (strcmp(array[2]->key,"escorpião")   && strcmp("intenso", array[2]->tip1)      && strcmp(array[2]->tip2,"profundo")    && strcmp(array[2]->tip3,"perceptivo")) || \
+		     (strcmp(array[2]->key,"sagitário")   && strcmp("otimista", array[2]->tip1)     && strcmp(array[2]->tip2,"sincero")     && strcmp(array[2]->tip3,"corajoso"))   || \
+		     (strcmp(array[2]->key,"capricórnio") && strcmp("responsável", array[2]->tip1)  && strcmp(array[2]->tip2,"competitivo") && strcmp(array[2]->tip3,"realista")));
+	printf("%d", result);
+
+	CU_ASSERT_TRUE ( result );
+	fclose (f);
+	free (array);
+
+}
+
+// }}}1
+
 int main () {
 	if (CUE_SUCCESS != CU_initialize_registry()) return CU_get_error ();
 
@@ -82,6 +124,7 @@ int main () {
 	// Add tests to suite
 	CU_ADD_TEST (suite, arrayShuffle_test);
 	CU_ADD_TEST (suite, turnGenerate_test);
+	CU_ADD_TEST (suite, arrayGenerate_test);
 
 	CU_basic_set_mode(CU_BRM_VERBOSE);      // Be verbose
 	CU_basic_run_tests();                   // Run tests

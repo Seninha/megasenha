@@ -9,7 +9,10 @@
 
 int main (int argc, char **argv) {
 	mergedArrays * array;
-	array = readFile();
+	if (argc > 1) array = readFile(argv[1]);
+	else array = readFile("palavras.txt");
+
+	if (array == NULL) return 1;
 
 	playerType * player1, * player2;
 	player1 = createPlayer (1);
