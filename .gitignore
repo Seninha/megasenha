@@ -3,4 +3,5 @@ bin/*
 *.o
 
 ## Temporary files
+tmp/*
 tmp/
