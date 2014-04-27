@@ -18,17 +18,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <file/file.h>
 
 typedef struct {
 	char* name;
-	unsigned int scoreLevel1;
-	unsigned int scoreLevel2;
-	unsigned int turnLevel1;
-	unsigned int turnLevel2;
+	int scoreLevel;
 	FILE * in;
 	FILE * out;
 } playerType;
+
+_EXT_PLAYER playerType * playerGenerate (char * nameCurrent, FILE * inCurrent, FILE * outCurrent);
+_EXT_PLAYER int playerLevel1Won (int tipNum, playerType * playerCurrent);
+_EXT_PLAYER int playerLevel2Won (playerType * playerCurrent);
 
 #endif
 

@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 typedef struct {
 	char * key;
@@ -27,9 +28,16 @@ typedef struct {
 	char * tip3;
 } turnType;
 
+typedef struct mergedArrays {
+	turnType ** turnArray;
+	int turnSize;
+	int turnCount;
+} mergedArrays;
+
 _EXT_FILE void arrayShuffle(void *arr, size_t n, size_t size);
-_EXT_FILE turnType * turnGenerate (FILE * turnFile);
-_EXT_FILE turnType ** turnArray (FILE * turnFile, int * num);
+_EXT_FILE turnType * turnGenerate (FILE * turnFile, char * turnDifficulty);
+_EXT_FILE turnType ** arrayGenerate (FILE * turnFile, int * num, char turnDifficulty);
+_EXT_FILE mergedArrays * mergeArrays (FILE * turnFile);
 _EXT_FILE int turnEnough (int n);
 
 #endif

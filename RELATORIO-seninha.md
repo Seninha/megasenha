@@ -15,5 +15,6 @@
 26/04 | 00:30 - 05:30     | Codificar   | Criar módulo "src/file"
 26/04 | 07:00 - 08:30     | Especificar | Especificar Funções do módulo "src/player"
 26/04 | 15:30 - 18:00     | Codificar   | Criar módulo "src/player"
+26/04 | 18:00 - ??:??     | Especificar | Especificar Funções do módulo "src/game"
 
 vim:set ft=markdown:

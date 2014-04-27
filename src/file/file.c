@@ -9,8 +9,7 @@
 
 #include <file/file.h>
 
-
-void arrayShuffle(void *arr, size_t n, size_t size) {
+void arrayShuffle(void *arr, size_t n, size_t size) { // {{{1
 	char * aux;
 	char * array;
 
@@ -28,7 +27,7 @@ void arrayShuffle(void *arr, size_t n, size_t size) {
 	free(aux);
 }
 
-turnType * turnGenerate (FILE * turnFile) {
+turnType * turnGenerate (FILE * turnFile, char * turnDifficulty) { // {{{1
 	turnType * wordCurrent;
 	wordCurrent = NULL;
 
@@ -45,6 +44,7 @@ turnType * turnGenerate (FILE * turnFile) {
 
 	while ( count <= 5 ) {
 		charCurrent=fgetc(turnFile);
+		charCurrent=tolower(charCurrent);
 
 		if (charCurrent == '\n' || charCurrent == EOF) {
 			break;
@@ -69,6 +69,7 @@ turnType * turnGenerate (FILE * turnFile) {
 
 			else if (count == 2) {
 				wordCurrent->difficulty = charCurrent;
+				*turnDifficulty = charCurrent;
 			}
 
 			else if (count == 3) {
@@ -96,7 +97,8 @@ turnType * turnGenerate (FILE * turnFile) {
 	return wordCurrent;
 }
 
-turnType ** arrayGenerate (FILE * turnFile, int * num) {
+turnType ** arrayGenerate (FILE * turnFile, int * num, char turnDifficulty) { // {{{1
+	rewind(turnFile);
 
 	turnType * wordCurrent;
 	turnType ** turnArray;
@@ -106,22 +108,65 @@ turnType ** arrayGenerate (FILE * turnFile, int * num) {
 
 	int count = 0;
 
-	while ((wordCurrent = turnGenerate(turnFile)) != NULL) {
-		count++;
+	char difficultyCurrent;
 
-		turnArray = realloc ( turnArray, (sizeof (turnType*) * count));
-		turnArray[count-1]=wordCurrent;
+	while ((wordCurrent = turnGenerate(turnFile, &difficultyCurrent)) != NULL) {
+		if (difficultyCurrent == turnDifficulty) {
+			count++;
+
+			turnArray = realloc ( turnArray, (sizeof (turnType*) * count));
+			turnArray[count-1]=wordCurrent;
+		}
 	}
 
 	*num=count;
+	arrayShuffle(turnArray, *num, sizeof (turnType *)); 
+
 	return turnArray;
 }
 
-// O Jogo funciona bem com um mínimo de 20 palavras
-int turnEnough (int n) {
-	if ( n<20 ) return 0;
-	return 1;
+mergedArrays * mergeArrays (FILE * turnFile) { // {{{1
+	mergedArrays * array;
+
+	array = NULL;
+	array = malloc (sizeof(mergedArrays)*3);
+
+	array[0].turnArray = arrayGenerate (turnFile, &(array[0].turnSize), 'f');
+	array[0].turnCount = 0;
+
+	array[1].turnArray = arrayGenerate (turnFile, &(array[1].turnSize), 'm');
+	array[1].turnCount = 0;
+
+	array[2].turnArray = arrayGenerate (turnFile, &(array[2].turnSize), 'd');
+	array[2].turnCount = 0;
+
+	return array;
 }
 
+int turnEnough (int n) { // {{{1
+	if ( n<7 ) return 1;
+	return 0;
+}
+
+// }}}1
+
+int main () {
+	FILE * arquivo;
+	arquivo = fopen ("batata.tmp", "r");
+	turnType ** jorje;
+	jorje = NULL;
+	int n;
+	jorje = arrayGenerate(arquivo, &n, 'f');
+
+	int i;
+	for (i=0; i<n; i++) {
+		printf("%s\n", jorje[i]->key);
+		printf("%c\n", jorje[i]->difficulty);
+		printf("%s\n", jorje[i]->tip1);
+		printf("%s\n", jorje[i]->tip2);
+		printf("%s\n", jorje[i]->tip3);
+	}
+	return 0;
+}
 
 /* vim: set ai fdm=marker fmr={{{,}}} ft=c: */
