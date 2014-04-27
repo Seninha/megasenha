@@ -112,7 +112,7 @@ char * wordInsert (FILE * fileCurrent) { // {{{1
 
 	for (count=0 ; wordCurrent[count] != '\0' ; count++) {
 		wordCurrent[count] = tolower(wordCurrent[count]);
-		wordCurrent[count] = toascii(wordCurrent[count]);
+		//wordCurrent[count] = toascii(wordCurrent[count]);
 	}
 
 	return wordCurrent;

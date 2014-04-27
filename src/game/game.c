@@ -9,6 +9,7 @@
 
 int turnPlay (turnType ** turnArray, int num, int *usedElements, int turnNumber, playerType * playerCurrent) { // {{{1
 	(*usedElements)++;
+	int attempt;
 
 	if (*usedElements >= num)
 		*usedElements=1;
@@ -20,23 +21,26 @@ int turnPlay (turnType ** turnArray, int num, int *usedElements, int turnNumber,
 
 	tipShow (playerCurrent->out, turnArray[*usedElements]->tip1, 1);
 	tryCurrent = wordInsert(playerCurrent->in);
-	if (! strcmp (tryCurrent, turnArray[*usedElements]->key)) {
+	attempt = 10 - strcmp (tryCurrent, turnArray[*usedElements]->key);
+	if (! attempt) {
 		turnRight(playerCurrent->out);
 		return 1;
 	}
 
 	tipShow (playerCurrent->out, turnArray[*usedElements]->tip2, 2);
 	tryCurrent = wordInsert(playerCurrent->in);
-	if (! strcmp (tryCurrent, turnArray[*usedElements]->key)) {
+	attempt = 10 - strcmp (tryCurrent, turnArray[*usedElements]->key);
+	if (! attempt) {
 		turnRight(playerCurrent->out);
-		return 2;
+		return 1;
 	}
 
 	tipShow (playerCurrent->out, turnArray[*usedElements]->tip3, 3);
 	tryCurrent = wordInsert(playerCurrent->in);
-	if (! strcmp (tryCurrent, turnArray[*usedElements]->key)) {
+	attempt = 10 - strcmp (tryCurrent, turnArray[*usedElements]->key);
+	if (! attempt) {
 		turnRight(playerCurrent->out);
-		return 3;
+		return 1;
 	}
 
 	turnWrong(playerCurrent->out, turnArray[*usedElements]->key);
