@@ -8,25 +8,21 @@
 #include <interface/interface.h>
 
 int gameContinue (FILE * outCurrent, FILE * inCurrent) { // {{{1
-	fprintf(outCurrent, "\nVocê deseja sair do jogo? [S/n] ");
+	fprintf(outCurrent, "\nVocê deseja sair do jogo? [s/N] ");
+	char * option;
+	option = NULL;
+	size_t n = 0;
 
-	char * input;
-	char option = 'n';
-	input = NULL;
-	size_t n;
+	getline (&option, &n, inCurrent);
+	if (option[0] == 's' || option[0] == 'S') return 0;
 
-	getline (&input, &n, inCurrent);
-	if (n == 2) option = input[0];
-	if (n == 1) option = 's';
-
-	if (option == 's' || option == 'S') {
-		return 1;
-	}
-	return 0;
+	free (option);
+	return 1;
 
 }
 
 void gameStart (FILE * outCurrent) { // {{{1
+fprintf (outCurrent, "\x1b[1;1H\x1b[2J");
 fprintf (outCurrent, "\n\
 \n\
                                                                                          \n\
@@ -79,7 +75,7 @@ fprintf (outCurrent, "\n\
 \x1b[0m\n");
 
 fprintf (outCurrent, "\n\
-  \x1b[1;31m========================================================================\n\
+  \x1b[1;31m===============================================================\n\
   \x1b[1;31m=\x1b[1;37m Megasenha é um jogo onde os participantes têm como objetivo \x1b[1;31m=\n\
   \x1b[1;31m=\x1b[1;37m adivinhar uma  série de palavras-chaves  em um  determinado \x1b[1;31m=\n\
   \x1b[1;31m=\x1b[1;37m tendo a disposição um máximo de 3 palavras-dicas.           \x1b[1;31m=\n\
@@ -90,7 +86,7 @@ fprintf (outCurrent, "\n\
   \x1b[1;31m=\x1b[1;37m nos.                                                        \x1b[1;31m=\n\
   \x1b[1;31m=\x1b[1;37m                                                             \x1b[1;31m=\n\
   \x1b[1;31m=\x1b[1;37m Para mais informações, leia a documentação do jogo.         \x1b[1;31m=\n\
-  \x1b[1;31m========================================================================\n\
+  \x1b[1;31m===============================================================\n\
 \x1b[0m\n");
 
 fprintf (outCurrent, "\n\n\n\
@@ -119,32 +115,32 @@ char * wordInsert (FILE * fileCurrent) { // {{{1
 }
 
 void tipShow (FILE * outCurrent, char * tipCurrent, int n) { // {{{1
-	fprintf(outCurrent, "	Dica nº %d: %s\n\
-	Resposta: ", n, tipCurrent);
+	fprintf(outCurrent, "	Dica nº %d: \x1b[1m%s\n\
+	Resposta: \x1b[0m", n, tipCurrent);
 }
 
 void turnWrong (FILE * outCurrent, char * keyWord) { // {{{1
-	fprintf(outCurrent, "\x1b[1;31mERROU!\x1b[0m Palavra-chave é: %s\n", keyWord);
+	fprintf(outCurrent, "	\x1b[1;31mERROU!\x1b[0m Palavra-chave é: %s\n", keyWord);
 }
 
 void turnRight (FILE * outCurrent) { // {{{1
-	fprintf(outCurrent, "\x1b[1;32mACERTOU!\x1b[0m");
+	fprintf(outCurrent, "	\x1b[1;32mACERTOU!\x1b[0m\n");
 }
 
 void turnInit (FILE * outCurrent, int n, char* playerName) { // {{{1
-	fprintf(outCurrent, "\n\x1b[1mTurno nº %d\nJogador: %s\nBoa Sorte!\n\x1b[0m", n, playerName);
+	fprintf(outCurrent, "\n\x1b[1mTurno nº %d\nJogador: %sBoa Sorte!\n\x1b[0m", n, playerName);
 }
 
 void level2lose (FILE * outCurrent) { // {{{1
-	fprintf(outCurrent, "\x1b[1mERROU! PERDEU TUDO!\x1b[0m");
+	fprintf(outCurrent, "\n\x1b[1;34;41mERROU! PERDEU TUDO!\x1b[0m\n");
 }
 
 void level2win (FILE * outCurrent, int score) { // {{{1
-	fprintf(outCurrent, "\x1b[1mPARABÉNS!!! VOCÊ CHEGOU ATÉ O FINAL COM %d PONTOS!\x1b[0m", score);
+	fprintf(outCurrent, "\n\x1b[1;44mPARABÉNS!!! VOCÊ CHEGOU ATÉ O FINAL COM %d PONTOS!\x1b[0m\n", score);
 }
 
 void level2giveUp (FILE * outCurrent, int score) { // {{{1
-	fprintf(outCurrent, "\x1b[1mVOCÊ DESISTIU!!! Acumulaste %d pontos!\x1b[0m", score);
+	fprintf(outCurrent, "\n\x1b[1;33mVOCÊ DESISTIU!!! Acumulaste %d pontos!\x1b[0m\n", score);
 }
 
 void levelChange (FILE * outCurrent, char *playerName) { // {{{1
@@ -159,9 +155,10 @@ playerType * createPlayer (int num) { // {{{1
 	playerType * player;
 	player = NULL;
 	char * nameCurrent;
-	size_t n;
+	nameCurrent = NULL;
+	size_t n = 0;
 
-	fprintf (stdout, "\nEscreva seu nome, jogador %d: ", num);
+	fprintf (stdout, "Escreva seu nome, jogador %d: ", num);
 	getline (&nameCurrent, &n, stdin);
 
 	player = playerGenerate (nameCurrent, stdin, stdout);

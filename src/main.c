@@ -14,7 +14,10 @@ int main (int argc, char **argv) {
 
 	if (array == NULL) return 1;
 
-	playerType * player1, * player2;
+	playerType * player1;
+	playerType * player2;
+	player1 = NULL;
+	player2 = NULL;
 	player1 = createPlayer (1);
 	player2 = createPlayer (2);
 

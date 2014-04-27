@@ -1,6 +1,6 @@
-# Object files and binaries
+## Object files and binaries
 bin/*
 *.o
 
-# Temporary files
-tmp/
+## Temporary files
+# tmp/
