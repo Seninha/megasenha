@@ -21,6 +21,7 @@
 27/04 | 13:00 - 13:50     | Especificar            | Especificar Funções do módulo "main"
 27/04 | 13:50 - 18:00     | Codificar              | Criar módulo main
 27/04 | 18:00 - 21:00     | Revisar                | Revisar código de todos os módulos
-27/04 | 21:00 - 02:00     | Redigir Casos de Teste | Redigir casos de testes para os módulos "file" e "player"
+27/04 | 21:00 - 01:45     | Redigir Casos de Teste | Redigir casos de testes para os módulos "file" e "player"
+28/04 | 01:45 - 02:00     | Redigir Casos de Teste | Redigir casos de testes para os módulos "interface" e "game"
 
 vim:set ft=markdown:

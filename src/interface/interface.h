@@ -1,6 +1,6 @@
 /*
- * interface_arquivo.h
- * Last Change:  2014-04-25
+ * interface.h
+ * Last Change:  2014-04-28
  * Maintainer:   Lucas de Sena <contact@seninha.net>
  * License:      This file is placed in public domain.
  */
