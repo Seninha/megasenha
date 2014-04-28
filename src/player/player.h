@@ -1,6 +1,6 @@
 /*
- * interface_arquivo.h
- * Last Change:  2014-04-25
+ * player.h
+ * Last Change:  2014-04-28
  * Maintainer:   Lucas de Sena <contact@seninha.net>
  * License:      This file is placed in public domain.
  */
@@ -27,8 +27,6 @@ typedef struct {
 } playerType;
 
 _EXT_PLAYER playerType * playerGenerate (char * nameCurrent, FILE * inCurrent, FILE * outCurrent);
-_EXT_PLAYER int playerLevel1Won (int tipNum, playerType * playerCurrent);
-_EXT_PLAYER int playerLevel2Won (playerType * playerCurrent);
 
 #endif
 

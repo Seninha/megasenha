@@ -18,6 +18,18 @@ interface.o: src/interface/interface.c src/interface/interface.h
 game.o: src/game/game.c src/game/game.h
 	gcc -Og -Wall -I "src/" -c src/game/game.c -o src/game/game.o
 
+file.test: src/file/file.c src/file/file.h src/file/file.test.c
+	gcc -lcunit -Og -Wall -I "src/" src/file/file.test.c -o bin/file.test
+
+player.test: src/player/player.c src/player/player.h src/player/player.test.c
+	gcc -lcunit -Og -Wall -I "src/" src/player/player.test.c -o bin/player.test
+
+interface.test: src/interface/interface.c src/interface/interface.h src/interface/interface.test.c
+	gcc -lcunit -Og -Wall -I "src/" src/interface/interface.test.c -o bin/interface.test
+
+game.test: src/game/game.c src/game/game.h src/game/game.test.c
+	gcc -lcunit -Og -Wall -I "src/" src/game/game.test.c -o bin/game.test
+
 clean:
 	rm src/*.o
 	rm src/*/*.o

@@ -1,6 +1,6 @@
 /*
- * modulo_jogo.c
- * Last Change:  2014-04-25
+ * file.c
+ * Last Change:  2014-04-28
  * Maintainer:   Lucas de Sena <contact@seninha.net>
  * License:      This file is placed in public domain.
  */

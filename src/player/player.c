@@ -1,13 +1,13 @@
 /*
  * player.c
- * Last Change:  2014-04-26
+ * Last Change:  2014-04-28
  * Maintainer:   Lucas de Sena <contact@seninha.net>
  * License:      This file is placed in public domain.
  */
 
 #include <player/player.h>
 
-playerType * playerGenerate (char * nameCurrent, FILE * inCurrent, FILE * outCurrent) {
+playerType * playerGenerate (char * nameCurrent, FILE * inCurrent, FILE * outCurrent) { // {{{1
 	playerType * playerCurrent;
 
 	playerCurrent = malloc (sizeof (playerType));
@@ -21,5 +21,6 @@ playerType * playerGenerate (char * nameCurrent, FILE * inCurrent, FILE * outCur
 	return playerCurrent;
 }
 
+// }}}1
 
 /* vim: set ai fdm=marker fmr={{{,}}} ft=c: */
