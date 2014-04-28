@@ -5,6 +5,8 @@
  * License:      This file is placed in public domain.
  */
 
+#define _GAME_SERVER
+
 #include <game/game.h>
 
 int turnPlay (turnType ** turnArray, int num, int *usedElements, int turnNumber, playerType * playerCurrent) { // {{{1

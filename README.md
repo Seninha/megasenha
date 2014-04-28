@@ -92,3 +92,9 @@ perderá toda a pontuação da **Fase Final**, encerrando-se o jogo.
 
 Após cada turno, o jogador pode desistir de realizar os turnos seguintes. Neste
 caso o jogo se encerrará e ele não perderá os pontos ganhos.
+
+
+## Instalação
+
+Leia o arquivo `INSTALL.md` para saber como compilar e executar o jogo.
+

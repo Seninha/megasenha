@@ -5,6 +5,8 @@
  * License:      This file is placed in public domain.
  */
 
+#define _INTERFACE_SERVER
+
 #include <interface/interface.h>
 
 int gameContinue (FILE * outCurrent, FILE * inCurrent) { // {{{1

@@ -5,6 +5,8 @@
  * License:      This file is placed in public domain.
  */
 
+#define _PLAYER_SERVER
+
 #include <player/player.h>
 
 playerType * playerGenerate (char * nameCurrent, FILE * inCurrent, FILE * outCurrent) { // {{{1
