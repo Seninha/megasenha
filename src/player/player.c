@@ -11,6 +11,7 @@
 
 playerType * playerGenerate (char * nameCurrent, FILE * inCurrent, FILE * outCurrent) { // {{{1
 	playerType * playerCurrent;
+	playerCurrent = NULL;
 
 	playerCurrent = malloc (sizeof (playerType));
 

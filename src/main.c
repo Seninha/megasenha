@@ -5,9 +5,11 @@
  * License:      This file is placed in public domain.
  */
 
+#include <mcheck.h>
 #include <game/game.h>
 
 int main (int argc, char **argv) {
+	mtrace();
 	mergedArrays * array;
 	if (argc > 1) array = readFile(argv[1]);
 	else array = readFile("palavras.txt");
