@@ -5,3 +5,6 @@ bin/*
 ## Temporary files
 tmp/*
 tmp/
+
+## Documentation
+doc/*

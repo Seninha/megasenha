@@ -36,10 +36,17 @@ game.test: src/game/game.c src/game/game.h src/game/game.test.c base
 	gcc -std=gnu99 -lcunit -Og -Wall -I "src/" src/game/game.test.c -o bin/game.test
 
 
+## Create documentation
+doc: ./Doxyfile
+	doxygen ./Doxyfile
+
 
 clean:
 	rm src/*.o
 	rm src/*/*.o
+
+docclean:
+	rm -rf doc/*
 
 base:
 	mkdir -p bin tmp

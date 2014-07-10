@@ -9,7 +9,15 @@
 
 #include <interface/interface.h>
 
-int gameContinue (FILE * outCurrent, FILE * inCurrent) { // {{{1
+/**
+ * @brief Pergunta ao jogador se ele deseja sair do jogo
+ *
+ * @param outCurrent Arquivo de saída
+ * @param inCurrent Arquivo de entrada
+ *
+ * @return Retorna 1 caso o jogador deseja sair, 0 caso contrário
+ */
+int gameContinue (FILE * outCurrent, FILE * inCurrent) {
 	fprintf(outCurrent, "\nVocê deseja sair do jogo? [s/N] ");
 	char * option;
 	option = NULL;
@@ -23,7 +31,14 @@ int gameContinue (FILE * outCurrent, FILE * inCurrent) { // {{{1
 
 }
 
-void gameStart (FILE * outCurrent) { // {{{1
+/**
+ * @brief IMPRIME MINHA CARA LOCA!!!!
+ * 
+ * Gol da Alemanha
+ *
+ * @param outCurrent Arquivo de saída
+ */
+void gameStart (FILE * outCurrent) {
 fprintf (outCurrent, "\x1b[1;1H\x1b[2J");
 fprintf (outCurrent, "\n\
 \n\
@@ -62,9 +77,9 @@ fprintf (outCurrent, "\n\
                  .MXKd    .....'..''',;;;;,;::::::::;::codkOOOOkxxxOkddNW;               \n\
                   .xNKx.  ........'',,,,,,,,;;::::::::::::::cc::cldOOxXM.                \n\
                      kW,  .''......''',,,,;;,,;;;;::::clloodxkxxkkOO0OWO                 \n\
-                     dWo;..','''...'''''',,,;,;;:::ccodxkkO0KKK0K0000KWO                 \n\
-                      :xWK:,,,,'''...'''..',,,;;::loooddxkOOOkkkOOOkO0NMo                \n\
-                        oWk,,,,,,'''...........',;:cclllooddddddddxxxkNMN                \n\
+                     dWo;..','''...'''''',,,;,;;:::ccodxkkO0GOL0K0000KWO                 \n\
+                      :xWK:,,,,'''...'''..',,,;;::loooddxkOOOkDAOOOkO0NMo                \n\
+                        oWk,,,,,,'''...........',;:cclllooALEMANHAxxxkNMN                \n\
                         'MO,,,,,,,''''...........',;;;;;::ccllooollookXM,                \n\
                          Mk,,;,,,''''...............'',,,,;;:::ccc:;;lNM                 \n\
                         .Wk,,;,,,,'''.........    ......'.'.'',,'...,OW;                 \n\
@@ -99,7 +114,14 @@ fprintf (outCurrent, "\x1b[1;1H\x1b[2J");
 
 }
 
-char * wordInsert (FILE * fileCurrent) { // {{{1
+/**
+ * @brief Obtém uma palavra do arquivo atual
+ *
+ * @param fileCurrent Arquivo atual
+ *
+ * @return  String da palavra obtida
+ */
+char * wordInsert (FILE * fileCurrent) {
 	int count;
 	size_t n=0;
 	char * wordCurrent;
@@ -116,36 +138,84 @@ char * wordInsert (FILE * fileCurrent) { // {{{1
 	return wordCurrent;
 }
 
-void tipShow (FILE * outCurrent, char * tipCurrent, int n) { // {{{1
+/**
+ * @brief Mostra dica do turno atual
+ *
+ * @param outCurrent Arquivo de Saída
+ * @param tipCurrent Arquivo de Entrada
+ * @param n Número do turno
+ */
+void tipShow (FILE * outCurrent, char * tipCurrent, int n) {
 	fprintf(outCurrent, "	Dica nº %d: \x1b[1m%s\n\
 	Resposta: \x1b[0m", n, tipCurrent);
 }
 
-void turnWrong (FILE * outCurrent, char * keyWord) { // {{{1
+/**
+ * @brief Mostra que usuário errou o turno
+ *
+ * @param outCurrent Arquivo de Saída
+ * @param keyWord Palavra correta que o usuário não acertou
+ */
+void turnWrong (FILE * outCurrent, char * keyWord) {
 	fprintf(outCurrent, "	\x1b[1;31mERROU!\x1b[0m Palavra-chave é: %s\n", keyWord);
 }
 
-void turnRight (FILE * outCurrent) { // {{{1
+/**
+ * @brief Mostra que usuário acertou o turno
+ *
+ * @param outCurrent Arquivo de Saída
+ */
+void turnRight (FILE * outCurrent) {
 	fprintf(outCurrent, "	\x1b[1;32mACERTOU!\x1b[0m\n");
 }
 
-void turnInit (FILE * outCurrent, int n, char* playerName) { // {{{1
+/**
+ * @brief Inicia um turno
+ *
+ * @param outCurrent Arquivo de Saída
+ * @param n Número do turno atual
+ * @param playerName Nome do jogador
+ */
+void turnInit (FILE * outCurrent, int n, char* playerName) {
 	fprintf(outCurrent, "\n\x1b[1mTurno nº %d\nJogador: %sBoa Sorte!\n\x1b[0m", n, playerName);
 }
 
-void level2lose (FILE * outCurrent) { // {{{1
+/**
+ * @brief Mostra que o jogador perdeu o jogo
+ *
+ * @param outCurrent Arquivo de Saída
+ */
+void level2lose (FILE * outCurrent) {
 	fprintf(outCurrent, "\n\x1b[1;34;41mERROU! PERDEU TUDO!\x1b[0m\n");
 }
 
-void level2win (FILE * outCurrent, int score) { // {{{1
+/**
+ * @brief Mostra que o jogador ganhou o jogo
+ *
+ * @param outCurrent Arquivo de SAída
+ * @param score Pontuação do jogador
+ */
+void level2win (FILE * outCurrent, int score) {
 	fprintf(outCurrent, "\n\x1b[1;44mPARABÉNS!!! VOCÊ CHEGOU ATÉ O FINAL COM %d PONTOS!\x1b[0m\n", score);
 }
 
-void level2giveUp (FILE * outCurrent, int score) { // {{{1
+/**
+ * @brief Mostra quantidade de pontuação acumulada até então pelo jogador desistente
+ *
+ * @param outCurrent Arquivo de saída
+ * @param score Pontuação do jogador
+ */
+void level2giveUp (FILE * outCurrent, int score) {
 	fprintf(outCurrent, "\n\x1b[1;33mVOCÊ DESISTIU!!! Acumulaste %d pontos!\x1b[0m\n", score);
 }
 
-void levelChange (FILE * outCurrent, char *playerName) { // {{{1
+/**
+ * @brief Encerra a rodada de nível 1 e inicia a rodada de nível 2
+ *
+ * @param outCurrent Arquivo de saída
+ * @param playerName Nome do jogador vencedor da rodada 1
+ */
+void levelChange (FILE * outCurrent, char *playerName) {
 	fprintf (outCurrent, "\x1b[1;1H\x1b[2J");
 	fprintf(outCurrent, "\x1b[1m\
 ---------------------------------------[\
@@ -153,7 +223,14 @@ FASE FINAL!\
 ]---------------------------------------");
 }
 
-playerType * createPlayer (int num) { // {{{1
+/**
+ * @brief Interface para criar um jogador
+ *
+ * @param num Numero do jogador
+ *
+ * @return Retorna um jogador, i.e. um objeto do tipo `playerType *`
+ */
+playerType * createPlayer (int num) {
 	playerType * player;
 	player = NULL;
 	char * nameCurrent;
@@ -168,7 +245,14 @@ playerType * createPlayer (int num) { // {{{1
 	return player;
 }
 
-mergedArrays * readFile (char * fileName) { // {{{1
+/**
+ * @brief Interface para ler arquivo que contém os turnos, 
+ *
+ * @param fileName Nome do arquivo
+ *
+ * @return Retorna vetorzão com os turnos
+ */
+mergedArrays * readFile (char * fileName) {
 	int getError = 0;
 	FILE * fp;
 	fp = fopen(fileName, "r");
@@ -207,5 +291,4 @@ mergedArrays * readFile (char * fileName) { // {{{1
 	return array;
 
 }
-// }}}1
 /* vim: set ai fdm=marker fmr={{{,}}} ft=c: */

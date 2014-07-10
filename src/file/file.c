@@ -9,25 +9,46 @@
 
 #include <file/file.h>
 
-void arrayShuffle(void *arr, size_t n, size_t size) { // {{{1
-	char * aux;
-	char * array;
+/** Mistura o conteúdo de um vetor
+ * \param  arr
+ *         Vetor a ser misturado
+ *
+ * \param  n
+ *         Tamanho de cada entrada do vetor
+ *
+ * \param  size
+ *         Quantidade de entradas que o vetor possui
+ *
+ * \return Gol da Alemanha
+ */
+void arrayShuffle(void *arr, size_t n, size_t size) {
 
-	array = (char *) arr;
-	aux = (char *) malloc(size);
+    char * aux;
+    char * array;
 
-	size_t i, j;
-	for (i = n-1; i + 1 > 0; --i) {
-		j = rand() % (i+1);
+    array = (char *) arr;
+    aux = (char *) malloc(size);
 
-		memcpy(aux, &array[size*j], size);
-		memcpy(&array[size*j], &array[size*i], size);
-		memcpy(&array[size*i], aux, size);
-	}
-	free(aux);
+    size_t i, j;
+    for (i = n-1; i + 1 > 0; --i) {
+        j = rand() % (i+1);
+
+        memcpy(aux, &array[size*j], size);
+        memcpy(&array[size*j], &array[size*i], size);
+        memcpy(&array[size*i], aux, size);
+    }
+    free(aux);
 }
 
-turnType * turnGenerate (FILE * turnFile, char * turnDifficulty) { // {{{1
+/**
+ * Procura em um arquivo, uma entrada de turno com uma dificuldade
+ *
+ * @param turnFile Arquivo que contém os turnos
+ * @param turnDifficulty Dificuldade do turno
+ *
+ * @return Retorna um turno, i.e. um objeto do tipo `turnType *`
+ */
+turnType * turnGenerate (FILE * turnFile, char * turnDifficulty) {
 	turnType * wordCurrent;
 	wordCurrent = NULL;
 
@@ -97,7 +118,18 @@ turnType * turnGenerate (FILE * turnFile, char * turnDifficulty) { // {{{1
 	return wordCurrent;
 }
 
-turnType ** arrayGenerate (FILE * turnFile, int * num, char turnDifficulty) { // {{{1
+/**
+ * @brief Gera um vetor de turnos
+ *
+ * Essa função usa a função `turnGenerate` para obter os turnos do arquivo
+ *
+ * @param turnFile Arquivo que contém os turnos
+ * @param num Número de turnos
+ * @param turnDifficulty Dificuldade dos turnos
+ *
+ * @return Retorna um vetor de turnos, i.e. um objeto do tipo `turnType **`
+ */
+turnType ** arrayGenerate (FILE * turnFile, int * num, char turnDifficulty) {
 	rewind(turnFile);
 
 	turnType * wordCurrent;
@@ -125,7 +157,15 @@ turnType ** arrayGenerate (FILE * turnFile, int * num, char turnDifficulty) { //
 	return turnArray;
 }
 
-mergedArrays * mergeArrays (FILE * turnFile) { // {{{1
+/**
+ * Cria um vetor com todos os turnos de um arquivo, conténdo metadados
+ * sobre eles
+ *
+ * @param turnFile Arquivo que contém os turnos
+ *
+ * @return Retorna um vetor de metadados de turnos
+ */
+mergedArrays * mergeArrays (FILE * turnFile) {
 	mergedArrays * array;
 
 	array = NULL;
@@ -143,11 +183,16 @@ mergedArrays * mergeArrays (FILE * turnFile) { // {{{1
 	return array;
 }
 
-int turnEnough (int n) { // {{{1
+/**
+ * @brief Verifica se a quantidade de turnos é suficiente (mais de 7)
+ *
+ * @param n Quantidade de turnos
+ *
+ * @return Retorna 1 caso não haver turno suficiente, 0 caso contrário
+ */
+int turnEnough (int n) {
 	if ( n<7 ) return 1;
 	return 0;
 }
-
-// }}}1
 
 /* vim: set ai fdm=marker fmr={{{,}}} ft=c: */

@@ -9,7 +9,18 @@
 
 #include <game/game.h>
 
-int turnPlay (turnType ** turnArray, int num, int *usedElements, int turnNumber, playerType * playerCurrent) { // {{{1
+/*!
+ * Executa um turno
+ *
+ * @param turnArray Vetor que contém os turnos do qual será obtido o atual
+ * @param num Quantidade de elementos do vetor
+ * @param usedElements Número de elementos usados
+ * @param turnNumber Número do turno atual
+ * @param playerCurrent Jogador atual
+ *
+ * @return Retorna 1 caso o jogador passou desse turno, 0 caso contrário
+ */
+int turnPlay (turnType ** turnArray, int num, int *usedElements, int turnNumber, playerType * playerCurrent) {
 	(*usedElements)++;
 	int attempt;
 
@@ -49,7 +60,19 @@ int turnPlay (turnType ** turnArray, int num, int *usedElements, int turnNumber,
 	return 0;
 }
 
-int level1 (mergedArrays * array, playerType * player1, playerType * player2) { // {{{1
+/**
+ * Executa rodada de nível 1.
+ * Enquanto escrevia a descrição dessa função a alemanha fez um gol.
+ *
+ * @param array Contém o vetor de turnos que será usado nessa rodada
+ * @param player1 Jogador 1
+ * @param player2 Jogador 2
+ *
+ * @return Retorna 1 caso jogador 1 vença, retorna 2 caso jogador 2 vença,
+ * retorna 0 caso contrário (nunca irá retornar 0, colocado apenas por motivos
+ * de debugação)
+ */
+int level1 (mergedArrays * array, playerType * player1, playerType * player2) {
 	int count, rnd;
 	for (count=0; count<3; count++){
 		rnd=rand()%3;
@@ -73,7 +96,15 @@ int level1 (mergedArrays * array, playerType * player1, playerType * player2) { 
 	return 0;
 }
 
-int level2 (mergedArrays * array, playerType * player) { // {{{1
+/**
+ * @brief Executa rodada de nível 2
+ *
+ * @param array Contém o vetor de turnos que será usado nessa rodada
+ * @param player Jogador que venceu a rodada 1
+ *
+ * @return 
+ */
+int level2 (mergedArrays * array, playerType * player) {
 	levelChange (player->out, player->name);
 	int score;
 
@@ -176,7 +207,5 @@ int level2 (mergedArrays * array, playerType * player) { // {{{1
 	level2win(player->out, player->scoreLevel);
 	return 0;
 }
-
-// }}}1
 
 /* vim: set ai fdm=marker fmr={{{,}}} ft=c: */

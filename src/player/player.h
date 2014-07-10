@@ -19,10 +19,20 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * @brief Tipo de dado de jogador, contém informações básicas dele
+ */
 typedef struct {
+        /// Nome do jogador
 	char* name;
+
+        /// Pontuação do jogador
 	int scoreLevel;
+
+        /// Arquivo de entrada do jogador
 	FILE * in;
+
+        /// Arquivo de saída do jogador
 	FILE * out;
 } playerType;
 

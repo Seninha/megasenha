@@ -24,5 +24,6 @@
 27/04 | 21:00 - 01:45     | Redigir Casos de Teste | Redigir casos de testes para os módulos "file" e "player"
 28/04 | 01:45 - 02:00     | Redigir Casos de Teste | Redigir casos de testes para os módulos "interface" e "game"
 28/04 | 03:55             | Finalizado!            | Trabalho finalmente concluído!
+09/07 | 15:00 -           | Redigir documentação   | Escrevendo a documentação com o Doxygen
 
 vim:set ft=markdown:

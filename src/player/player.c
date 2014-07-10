@@ -9,7 +9,16 @@
 
 #include <player/player.h>
 
-playerType * playerGenerate (char * nameCurrent, FILE * inCurrent, FILE * outCurrent) { // {{{1
+/**
+ * @brief Gera um jogador
+ *
+ * @param nameCurrent Nome do jogador
+ * @param inCurrent Arquivo de entrada do jogador
+ * @param outCurrent Arquivo de saída do jogador
+ *
+ * @return Retorna um jogador, i.e. um objeto do tipo `playerType *`
+ */
+playerType * playerGenerate (char * nameCurrent, FILE * inCurrent, FILE * outCurrent) {
 	playerType * playerCurrent;
 	playerCurrent = NULL;
 
@@ -23,7 +32,5 @@ playerType * playerGenerate (char * nameCurrent, FILE * inCurrent, FILE * outCur
 
 	return playerCurrent;
 }
-
-// }}}1
 
 /* vim: set ai fdm=marker fmr={{{,}}} ft=c: */

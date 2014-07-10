@@ -1,8 +1,8 @@
-/*
- * file.h
- * Last Change:  2014-04-28
- * Maintainer:   Lucas de Sena <contact@seninha.net>
- * License:      This file is placed in public domain.
+/**
+ * \file        file.h
+ * \date        2014-04-28
+ * \author      Lucas de Sena <contact@seninha.net>
+ * \copyright   Public domain.
  */
 
 #ifndef _FILE_MOD_
@@ -20,18 +20,35 @@
 #include <string.h>
 #include <ctype.h>
 
+/// Contém os dados de um turno
 typedef struct {
-	char * key;
-	char difficulty;
-	char * tip1;
-	char * tip2;
-	char * tip3;
+    /// Palavra chave do turno que deve ser encontrada
+    char * key;
+
+    /// Dificuldade do turno
+    char difficulty;
+    
+    /// Dica número 1
+    char * tip1;
+
+    /// Dica número 2
+    char * tip2;
+
+    /// Dica número 3
+    char * tip3;
 } turnType;
 
+/// Contém metadados sobre um turno
 typedef struct mergedArrays {
-	turnType ** turnArray;
-	int turnSize;
-	int turnCount;
+
+    /// Os dados do turno própriamente dito
+    turnType ** turnArray;
+
+    /// O tamanho do turno
+    int turnSize;
+
+    /// O contador do turno (Mostra qual é o número do turno atual)
+    int turnCount;
 } mergedArrays;
 
 _EXT_FILE void arrayShuffle(void *arr, size_t n, size_t size);
