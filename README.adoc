@@ -1,4 +1,5 @@
-# Megasenha
+Megasenha
+=========
 
 Esse é o desenvolvimento do primeiro trabalho da Turma A do primeiro
 semestre de 2014 da disciplina Programação Sistemática da Universidade de
@@ -7,7 +8,7 @@ Brasília.
 O trabalho consiste na criação de um jogo chamado **Megasenha**
 
 
-## Objetivo
+== Objetivo
 
 **Megasenha** é um jogo onde os participantes têm como objetivo adivinhar uma
 série de **palavras-chaves**.
@@ -18,7 +19,7 @@ Cada participande tem direito à 3 palavras-dicas para adivinhar a palavra-chave
 As **palavras-dicas** são sinônimos ou do mesmo campo lógico da palavra-chaves.
 
 
-## Andamento do Jogo
+== Andamento do Jogo
 
 - O jogo é dividido em duas fases: **Fase Eliminatória** e **Fase Final**.
 
@@ -40,7 +41,7 @@ As **palavras-dicas** são sinônimos ou do mesmo campo lógico da palavra-chave
   acessível a todos.
 
 
-### Turnos
+=== Turnos
 
 Durante um turno, as seguintes coisas acontecem, em ordem:
 
@@ -58,7 +59,7 @@ Durante um turno, as seguintes coisas acontecem, em ordem:
 5. Caso não consiga adivinhar, o jogador perde o turno.
 
 
-### Fase Eliminatória
+=== Fase Eliminatória
 
 Na Fase Eliminatória, dois jogadores jogam entre si alternando seus turnos.
 
@@ -69,24 +70,25 @@ Durante esta fase, cada turno vale uma pontuação definida por `P1 = 3 - D`, on
 `D` é a quantidade de dicas usadas.
 
 
-### Fase Final
+=== Fase Final
 
 Na Fase Final, o jogador fará no máximo 8 turnos.
 
 Cada turno vale uma quantidade determinada de pontos e possui uma dificuldade
 pré-definida, de acordo com a tabela abaixo:
 
-Turno | Pontuação | Dificuldade
-------|-----------|------------
-  1   | 10        | Fácil
-  2   | 100       | Fácil
-  3   | 500       | Fácil
-  4   | 1000      | Média
-  5   | 5000      | Média
-  6   | 10000     | Média
-  7   | 500000    | Difícil
-  8   | 1000000   | Difícil
-
+|===
+| Turno | Pontuação | Dificuldade
+|
+|   1   | 10        | Fácil
+|   2   | 100       | Fácil
+|   3   | 500       | Fácil
+|   4   | 1000      | Média
+|   5   | 5000      | Média
+|   6   | 10000     | Média
+|   7   | 500000    | Difícil
+|   8   | 1000000   | Difícil
+|===
 Caso o jogador perca um turno, ele não poderá realizar os turnos seguintes e
 perderá toda a pontuação da **Fase Final**, encerrando-se o jogo.
 
@@ -94,7 +96,76 @@ Após cada turno, o jogador pode desistir de realizar os turnos seguintes. Neste
 caso o jogo se encerrará e ele não perderá os pontos ganhos.
 
 
-## Instalação
+== Instalação
 
-Leia o arquivo `INSTALL.md` para saber como compilar e executar o jogo.
+Primeiro compile:
 
+    $ make
+
+
+Depois execute, substituindo `<file>` pelo nome do arquivo onde estão as
+palavras:
+
+
+    $ bin/megasenha "<file>"
+
+
+
+== Compilar módulos
+
+Você pode compilar módulos individualmente pelo seguinte comando:
+
+    $ make <module>.o
+
+Substitua `<module>` pelo nome do módulo desejado, que pode ser:
+	- file
+	- player
+	- interface
+	- game
+
+
+== Casos de teste
+
+Você pode testar os módulos individualmente.
+
+Para isso, compile o caso de teste do módulo desejado:
+
+    $ make <module>.test
+
+E execute:
+
+    $ bin/<module>.test
+
+Substitua `<module>` pelo nome do módulo desejado, veja na sessão acima os
+possíveis nomes para os módulos.
+
+
+== Documentação
+
+Para gerar a documentação, execute:
+
+    $ make doc
+
+Ou:
+
+    $ doxygen
+
+
+== Análise de Cobertura de Código (gcov)
+
+Para analisar os dados gerados pelo gcov durante a compilação, execute:
+
+    $ make <module>.gcov
+
+Substitua `<module>` pelo nome do módulo desejado. Esse comando criará, dentro
+da pasta do módulo o log gerado pela análise.
+
+
+== Análise Estática do Código (splint)
+
+Para analisar o código estaticamente, execute:
+
+    $ make <module>.splint
+
+Substitua `<module>` pelo nome do módulo desejado. Esse comando mostrará na tela
+o resultado da análise estática.

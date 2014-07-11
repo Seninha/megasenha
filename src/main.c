@@ -10,7 +10,9 @@
 
 int main (int argc, char **argv) {
 	mtrace();
+
 	mergedArrays * array;
+        array=NULL;
 	if (argc > 1) array = readFile(argv[1]);
 	else array = readFile("palavras.txt");
 

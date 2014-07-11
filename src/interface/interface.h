@@ -21,6 +21,7 @@
 #include <ctype.h>
 #include <player/player.h>
 #include <file/file.h>
+#include <curses.h>
 
 _EXT_INTERFACE int gameContinue (FILE * outCurrent, FILE * inCurrent);
 _EXT_INTERFACE void gameStart (FILE * outCurrent);
